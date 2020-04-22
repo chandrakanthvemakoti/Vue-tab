@@ -81,7 +81,8 @@ export default {
 
 
    methods:{
-       addnew: function(){
+       addnew: function(e){
+           e.preventDefault();
            var my_object ={
               
                name: this.name,
