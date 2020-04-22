@@ -6,35 +6,42 @@
                     <h1>Form</h1>
                     <hr>
                    
-                    <div class="form-group">
+                    <div class="form-group" :class="{invalid: $v.name.$error}">
                         <label for="name">Name</label>
                         <input
                                 type="text"
                                 id="name"
                                 class="form-control"
                                 v-model="name"
+                                @blur="$v.name.$touch()"
                                >
                     </div>
+                    <p v-if="!$v.name.required" style="color:red">*please enter the name</p>
                       
-                      <div class="form-group">
+                      <div class="form-group" :class="{invalid: $v.email.$error}">
                         <label for="email">Email</label>
                         <input
                                 type="email"
                                 id="email"
                                 class="form-control"
                                 v-model="email"
+                                @blur="$v.email.$touch()"
                                 >
                     </div>
-                          
-                      <div class="form-group">
+                    <p v-if="!$v.email.email"  style="color:red">*please enter the valid email</p>
+                        <p v-if="!$v.email.required" style="color:red">*please enter the email</p>   
+                      <div class="form-group" :class="{invalid: $v.role.$error}">
                         <label for="role">role</label>
-                        <input
-                                type="text"
-                                id="role"
-                                class="form-control"
-                                v-model="role"
-                                >
-                    </div>     
+                       <select 
+                        id="role"
+                        class="form-control"
+                        v-model="role"
+                         @blur="$v.role.$touch()">
+
+                  <option v-for="ro in roles">{{ro}}</option>
+                       </select>
+                    </div>  
+                     <p v-if="!$v.role.required" style="color:red">*please select the role</p>   
 
                     </div>
             </div>
@@ -43,6 +50,8 @@
                     <button
                             class="btn btn-primary"
                             @click="addnew"
+                            :disabled="$v.$invalid"
+
                             >Submit
                     </button>
                 </div>
@@ -64,7 +73,9 @@
    
 </template>
 <script>
+import {required,email} from 'vuelidate/lib/validators'
 import Table from './Table.vue'
+
 export default {
    data(){
        return{
@@ -72,6 +83,7 @@ export default {
      headers: [ 'name', 'email', 'role'],
       name:'',
       email:'',
+      roles: [' js developer','vue developer','node developer'],
       role:'',
       employee:[]
     
@@ -102,6 +114,18 @@ export default {
 
    components:{
        appTable: Table
+   },
+   validations:{
+       name:{
+           required
+       },
+       email:{
+           required,
+           email
+       },
+       role:{
+           required
+       }
    }
    
 }
