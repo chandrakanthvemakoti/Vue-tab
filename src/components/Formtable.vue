@@ -105,9 +105,6 @@ export default {
            };
            this.employee.push(my_object)
            
-           this.name='';
-           this.email='';
-           this.role='';
 
     //      this.users.push({name:this.newElement.name,email:this.newElement.email,role:this.newElement.role});
     //   this.newElement = {name:"",email:"",role:""};
