@@ -13,6 +13,7 @@
                                 id="name"
                                 class="form-control"
                                 v-model="name"
+                                
                                 @blur="$v.name.$touch()"
                                >
                     </div>
@@ -37,6 +38,7 @@
                         class="form-control"
                         v-model="role"
                          @blur="$v.role.$touch()">
+                          <option value="" disabled selected hidden>Please Select</option>
 
                   <option v-for="ro in roles">{{ro}}</option>
                        </select>
