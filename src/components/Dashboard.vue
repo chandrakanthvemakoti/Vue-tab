@@ -2,11 +2,11 @@
     <div class="container">
    <h1>MY DASHBOARD</h1>
    <hr>
-    <div class="col-sm-6">
-    <app-table :items="contents" :columns="headers" @myemit="contents=$event" ></app-table>
+    <div class="col-sm-12">
+    <app-table :items="contents" :columns="headers"  ></app-table>
     </div>
     <div class="col-sm-12">
-    <app-formtable></app-formtable>
+    <app-formtable @myemit="contents=$event"></app-formtable>
     </div>
     
    </div>
